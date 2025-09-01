@@ -90,12 +90,37 @@ function voiceControl(string) {
   synth.speak(u);
 }
 
-function sendMessage() {
+async function sendMessage() {
   const inputField = document.getElementById("input");
   let input = inputField.value.trim();
-  input != "" && output(input);
+  if (!input) return;
+
+  // Show user message
+  addChat(input, "⏳ Thinking...");
+
+  try {
+    const response = await fetch("http://localhost:5000/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: input })
+    });
+
+    const data = await response.json();
+    const botReply = data.reply;
+
+    // Replace last bot message (⏳) with real reply
+    const botDivs = document.querySelectorAll("#bot-response");
+    botDivs[botDivs.length - 1].innerText = botReply;
+
+  } catch (error) {
+    console.error("Error:", error);
+    const botDivs = document.querySelectorAll("#bot-response");
+    botDivs[botDivs.length - 1].innerText = "⚠️ Server error, try again!";
+  }
+
   inputField.value = "";
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   const inputField = document.getElementById("input");
   inputField.addEventListener("keydown", function (e) {
