@@ -38,7 +38,9 @@ This project follows a full **DevOps pipeline** using GitHub Actions and GitOps 
 
 ---
 
-## Initial Repo Structure
+## 📂 Repository Structure
+
+```text
 ai-chatbot-devops/
 ├─ .github/                        # GitHub-specific configs
 │  ├─ ISSUE_TEMPLATE/              # Templates for new issues
@@ -70,5 +72,8 @@ ai-chatbot-devops/
 │
 ├─ docs/                           # Documentation
 │  ├─ architecture/                # Architecture diagrams
-│  └─ runbooks/                    # Operational pla
-
+│  └─ runbooks/                    # Operational playbooks
+│
+├─ .gitignore
+├─ LICENSE
+└─ README.md
