@@ -41,39 +41,36 @@ This project follows a full **DevOps pipeline** using GitHub Actions and GitOps 
 ## Repository Structure
 
 ```text
-ai-chatbot-devops/
-├─ .github/                        # GitHub-specific configs
-│  ├─ ISSUE_TEMPLATE/              # Templates for new issues
-│  │  ├─ bug_report.md
-│  │  └─ feature_request.md
-│  ├─ PULL_REQUEST_TEMPLATE.md     # Default template for pull requests
-│  └─ workflows/                   # GitHub Actions workflows (CI/CD)
-│     └─ ci.yml
-│
-├─ infra/                          # Infrastructure as code (Terraform)
-│  └─ terraform/
-│     ├─ modules/                  # Reusable Terraform modules
-│     ├─ envs/                     # Environment-specific configs
-│     │  ├─ dev/
-│     │  └─ prod/
-│     └─ main.tf                   # Root module entry point
-│
-├─ k8s/                            # Kubernetes manifests
-│  ├─ base/                        # Base YAML (common)
-│  └─ overlays/                    # Environment overrides
-│     ├─ dev/
-│     └─ prod/
-│
-├─ services/                       # Microservices for chatbot
-│  └─ webhook/
-│     ├─ src/                      # Source code (Python/Node.js)
-│     ├─ Dockerfile
-│     └─ README.md
-│
-├─ docs/                           # Documentation
-│  ├─ architecture/                # Architecture diagrams
-│  └─ runbooks/                    # Operational playbooks
-│
-├─ .gitignore
-├─ LICENSE
-└─ README.md
+your-chatbot-project/
+├── .github/
+│   └── workflows/
+│       └── jenkins-ci-cd.yml  # Or other CI/CD related files if not using Jenkins directly in repo
+├── backend/
+│   ├── src/
+│   │   └── (Python Flask / Node.js Express code)
+│   ├── Dockerfile            # For backend and DB
+│   ├── requirements.txt      # For Python dependencies
+│   └── package.json          # For Node.js dependencies
+├── frontend/
+│   ├── public/
+│   │   └── index.html
+│   ├── src/
+│   │   └── (React / HTML/CSS/JS code)
+│   ├── Dockerfile            # If frontend is also containerized
+│   └── package.json          # For React dependencies
+├── infrastructure/
+│   ├── terraform/
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   └── kubernetes/
+│       ├── deployment.yaml
+│       ├── service.yaml
+│       └── ingress.yaml
+├── documentation/
+│   ├── architecture-diagram.png
+│   ├── report.pdf           # Or .md
+│   └── demo-video.mp4
+├── README.md
+├── .gitignore
+└── Jenkinsfile              # For Jenkins pipeline definition
