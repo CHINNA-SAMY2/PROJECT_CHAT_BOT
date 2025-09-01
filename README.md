@@ -38,7 +38,7 @@ This project follows a full **DevOps pipeline** using GitHub Actions and GitOps 
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```text
 ai-chatbot-devops/
