@@ -1,0 +1,91 @@
+# local setup
+mkdir ai-chatbot-devops && cd ai-chatbot-devops
+git init -b main
+
+# add remote (replace <you> and repo name)
+git remote add origin git@github.com:<you>/ai-chatbot-devops.git
+
+# bring in the Day-1 README from the canvas (copy it into README.md), plus minimal skeleton
+mkdir -p .github/ISSUE_TEMPLATE .github/workflows infra/terraform/{modules,envs/{dev,prod}} k8s/{base,overlays/{dev,prod}} services/webhook/{src} docs/{architecture,runbooks}
+
+# Issue & PR templates (quick stubs)
+cat > .github/ISSUE_TEMPLATE/bug_report.md <<'EOF'
+### Bug
+**Steps to Reproduce**
+- 
+**Expected**
+- 
+**Logs/Screens**
+- 
+EOF
+
+cat > .github/ISSUE_TEMPLATE/feature_request.md <<'EOF'
+### Feature
+**Problem / Context**
+- 
+**Proposal**
+- 
+**Definition of Done**
+- 
+EOF
+
+cat > .github/PULL_REQUEST_TEMPLATE.md <<'EOF'
+## What
+-
+## Why
+-
+## How to test
+-
+## Checklist
+- [ ] Tests/linters pass
+- [ ] Docs updated
+- [ ] Linked issue
+EOF
+
+# Minimal CI placeholder (runs on PR and main/dev)
+cat > .github/workflows/ci.yml <<'EOF'
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [main, dev]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate repo layout
+        run: |
+          echo "OK"
+EOF
+
+# .gitignore (works for Node, Python, Terraform, macOS, VSCode)
+cat > .gitignore <<'EOF'
+# node
+node_modules/
+npm-debug.log*
+# python
+__pycache__/
+*.py[cod]
+.venv/
+# docker
+*.tar
+# terraform
+*.tfstate*
+.terraform/
+crash.log
+# macOS / IDE
+.DS_Store
+.vscode/
+.idea/
+# others
+.env
+EOF
+
+# stub files to keep dirs
+touch infra/terraform/main.tf k8s/base/.keep k8s/overlays/dev/.keep k8s/overlays/prod/.keep services/webhook/Dockerfile services/webhook/README.md docs/architecture/.keep docs/runbooks/.keep
+
+# add & commit
+git add .
+git commit -m "chore: repo bootstrap with Day-1 README, skeleton, CI, templates"
+git push -u origin main
