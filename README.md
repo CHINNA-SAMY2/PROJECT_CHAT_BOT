@@ -6,7 +6,7 @@ This project follows a full **DevOps pipeline** using GitHub Actions and GitOps 
 
 ---
 
-## 🚀 Project Goals
+## Project Goals
 - Build a production-grade chatbot using AWS Lex for natural language understanding.  
 - Automate infrastructure with Terraform (VPC, EKS, IAM, ECR).  
 - Deploy services on Kubernetes with GitOps workflows.  
@@ -15,7 +15,7 @@ This project follows a full **DevOps pipeline** using GitHub Actions and GitOps 
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 - **AI**: Amazon Lex V2 (chatbot engine)  
 - **Infra as Code**: Terraform (with remote state in S3 + DynamoDB lock)  
 - **Runtime**: Kubernetes (AWS EKS) with NGINX Ingress  
@@ -25,7 +25,7 @@ This project follows a full **DevOps pipeline** using GitHub Actions and GitOps 
 
 ---
 
-## 🌳 Branching Strategy
+## Branching Strategy
 - **main** → Protected branch, always stable/release-ready.  
 - **dev** → Integration branch where features are merged.  
 - **feature/*** → Short-lived branches for individual tasks.  
@@ -38,4 +38,4 @@ This project follows a full **DevOps pipeline** using GitHub Actions and GitOps 
 
 ---
 
-## 📂 Initial Repo Structure
+## Initial Repo Structure
