@@ -39,3 +39,36 @@ This project follows a full **DevOps pipeline** using GitHub Actions and GitOps 
 ---
 
 ## Initial Repo Structure
+ai-chatbot-devops/
+├─ .github/                        # GitHub-specific configs
+│  ├─ ISSUE_TEMPLATE/              # Templates for new issues
+│  │  ├─ bug_report.md
+│  │  └─ feature_request.md
+│  ├─ PULL_REQUEST_TEMPLATE.md     # Default template for pull requests
+│  └─ workflows/                   # GitHub Actions workflows (CI/CD)
+│     └─ ci.yml
+│
+├─ infra/                          # Infrastructure as code (Terraform)
+│  └─ terraform/
+│     ├─ modules/                  # Reusable Terraform modules
+│     ├─ envs/                     # Environment-specific configs
+│     │  ├─ dev/
+│     │  └─ prod/
+│     └─ main.tf                   # Root module entry point
+│
+├─ k8s/                            # Kubernetes manifests
+│  ├─ base/                        # Base YAML (common)
+│  └─ overlays/                    # Environment overrides
+│     ├─ dev/
+│     └─ prod/
+│
+├─ services/                       # Microservices for chatbot
+│  └─ webhook/
+│     ├─ src/                      # Source code (Python/Node.js)
+│     ├─ Dockerfile
+│     └─ README.md
+│
+├─ docs/                           # Documentation
+│  ├─ architecture/                # Architecture diagrams
+│  └─ runbooks/                    # Operational pla
+
