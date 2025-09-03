@@ -1,61 +1,54 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven3'
-        jdk 'JDK11'
+    environment {
+        SONARQUBE = credentials('sonarqube-token')
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/CHINNA-SAMY2/PROJECT_CHAT_BOT.git'
+                git url: 'https://github.com/your-org/your-repo.git', branch: 'main'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'mvn clean package -DskipTests'
+                sh 'make build' // or your build command
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'
-                junit '**/target/surefire-reports/*.xml'
+                sh 'make test' // or pytest, npm test, etc.
             }
         }
 
         stage('SonarQube Analysis') {
-            environment {
-                SONARQUBE = credentials('sonarqube-token')
-            }
             steps {
-                withSonarQubeEnv('MySonarQube') {
-                    sh 'mvn sonar:sonar -Dsonar.projectKey=PROJECT_CHAT_BOT'
+                withSonarQubeEnv('SonarQubeServer') {
+                    sh 'sonar-scanner'
                 }
             }
         }
 
         stage('Trivy Scan') {
             steps {
-                sh 'trivy fs --exit-code 0 --severity HIGH,CRITICAL .'
+                sh 'trivy fs . --exit-code 0 --severity HIGH,CRITICAL'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deployment step goes here'
+                echo 'Deploying...'
             }
         }
     }
 
     post {
-        success {
-            echo "✅ Pipeline executed successfully!"
-        }
-        failure {
-            echo "❌ Pipeline failed!"
+        always {
+            junit '**/test-results/*.xml'
+            archiveArtifacts artifacts: '**/build/**', fingerprint: true
         }
     }
 }
