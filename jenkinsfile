@@ -2,7 +2,12 @@ pipeline {
     agent any
 
     environment {
+        // SonarQube authentication token stored in Jenkins credentials
         SONARQUBE = credentials('sonarqube-token')
+    }
+
+    tools {
+        maven 'Maven3'   // Name of Maven installation in Jenkins Global Tool Configuration
     }
 
     stages {
@@ -12,13 +17,13 @@ pipeline {
             }
         }
 
-        stage('Build with Maven') {
+        stage('Build') {
             steps {
-                sh 'mvn clean install -DskipTests'
+                sh 'mvn clean install'
             }
         }
 
-        stage('Test with Maven') {
+        stage('Test') {
             steps {
                 sh 'mvn test'
             }
@@ -26,31 +31,25 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQubeServer') {
-                    sh 'mvn sonar:sonar'
+                withSonarQubeEnv('SonarQubeServer') {  // Must match the name you set in Jenkins → System → SonarQube installations
+                    sh 'mvn clean verify sonar:sonar'
                 }
-            }
-        }
-
-        stage('Trivy Scan') {
-            steps {
-                sh 'trivy fs . --exit-code 0 --severity HIGH,CRITICAL'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying...'
+                echo 'Deploying application...'
             }
         }
     }
 
     post {
         always {
-            // JUnit test reports from Maven
-            junit 'target/surefire-reports/*.xml'
+            // Publish test results
+            junit '**/target/surefire-reports/*.xml'
 
-            // Archive the built JAR/WAR files
+            // Archive build artifacts
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
         }
     }
