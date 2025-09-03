@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/your-org/your-repo.git', branch: 'main'
+                git url: 'https://github.com/CHINNA-SAMY2/PROJECT_CHAT_BOT.git', branch: 'main'
             }
         }
 
@@ -47,8 +47,11 @@ pipeline {
 
     post {
         always {
-            junit '**/test-results/*.xml'
-            archiveArtifacts artifacts: '**/build/**', fingerprint: true
+            script {
+                junit '**/test-results/*.xml'
+                archiveArtifacts artifacts: '**/build/**', fingerprint: true
+            }
         }
     }
 }
+
