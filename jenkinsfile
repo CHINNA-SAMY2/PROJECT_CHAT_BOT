@@ -12,22 +12,22 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build with Maven') {
             steps {
-                sh 'make build' // or your build command
+                sh 'mvn clean install -DskipTests'
             }
         }
 
-        stage('Test') {
+        stage('Test with Maven') {
             steps {
-                sh 'make test' // or pytest, npm test, etc.
+                sh 'mvn test'
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQubeServer') {
-                    sh 'sonar-scanner'
+                    sh 'mvn sonar:sonar'
                 }
             }
         }
@@ -47,11 +47,11 @@ pipeline {
 
     post {
         always {
-            script {
-                junit '**/test-results/*.xml'
-                archiveArtifacts artifacts: '**/build/**', fingerprint: true
-            }
+            // JUnit test reports from Maven
+            junit 'target/surefire-reports/*.xml'
+
+            // Archive the built JAR/WAR files
+            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
         }
     }
 }
-
