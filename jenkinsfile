@@ -28,11 +28,17 @@ pipeline {
             steps {
                 sh 'mvn test'
             }
+            post {
+                always {
+                    // ✅ Publish test results after running tests
+                    junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
+                }
+            }
         }
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQubeServer') {  // Must match the name you set in Jenkins → System → SonarQube installations
+                withSonarQubeEnv('SonarQubeServer') {  // Must match name in Jenkins → System → SonarQube installations
                     sh 'mvn clean verify sonar:sonar'
                 }
             }
@@ -47,11 +53,10 @@ pipeline {
 
     post {
         always {
-            // Publish test results
-            junit '**/target/surefire-reports/*.xml'
-
-            // Archive build artifacts
-            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+            script {
+                // ✅ Archive build artifacts (e.g., JARs)
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+            }
         }
     }
 }
