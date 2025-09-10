@@ -1,12 +1,12 @@
-# PROJECT_CHAT_BOT
-# AI-Driven Chatbot Platform with Full DevOps Pipeline
+ PROJECT_CHAT_BOT
+ AI-Driven Chatbot Platform with Full DevOps Pipeline
 
 A scalable chatbot platform integrating **Amazon Lex (V2)** for AI/NLP, **Terraform** for infrastructure automation, and **Kubernetes (EKS)** for deployment.  
 This project follows a full **DevOps pipeline** using GitHub Actions and GitOps (Argo CD).
 
----
 
-## Project Goals
+
+Project Goals
 - Build a production-grade chatbot using AWS Lex for natural language understanding.  
 - Automate infrastructure with Terraform (VPC, EKS, IAM, ECR).  
 - Deploy services on Kubernetes with GitOps workflows.  
@@ -15,7 +15,7 @@ This project follows a full **DevOps pipeline** using GitHub Actions and GitOps 
 
 ---
 
-## Tech Stack
+ Tech Stack
 - **AI**: Amazon Lex V2 (chatbot engine)  
 - **Infra as Code**: Terraform (with remote state in S3 + DynamoDB lock)  
 - **Runtime**: Kubernetes (AWS EKS) with NGINX Ingress  
@@ -25,7 +25,7 @@ This project follows a full **DevOps pipeline** using GitHub Actions and GitOps 
 
 ---
 
-## Branching Strategy
+ Branching Strategy
 - **main** → Protected branch, always stable/release-ready.  
 - **dev** → Integration branch where features are merged.  
 - **feature/*** → Short-lived branches for individual tasks.  
@@ -38,7 +38,7 @@ This project follows a full **DevOps pipeline** using GitHub Actions and GitOps 
 
 ---
 
-## Repository Structure
+ Repository Structure
 
 ```text
 your-chatbot-project/
@@ -74,3 +74,32 @@ your-chatbot-project/
 ├── README.md
 ├── .gitignore
 └── Jenkinsfile              # For Jenkins pipeline definition
+ Day 1 – Project Setup  
+- Created GitHub repository.  
+- Defined branching strategy: `main`, `dev`, `feature/*`.  
+- Added initial project goals.  
+
+ Day 2 – Backend Development  
+- Developed chatbot backend using **Python Flask**.  
+- Exposed APIs for chatbot queries.  
+- Tested locally with Postman.  
+
+ Day 3 – Frontend Setup  
+- Built simple **React frontend**.  
+- Integrated with backend API.  
+- Verified chatbot UI in browser.  
+
+ Day 4 – Dockerization  
+- Created **Dockerfiles** for backend and database.  
+- Built and ran containers locally.  
+- Pushed Docker images to **DockerHub**.  
+
+ Day 5 – Jenkins CI/CD  
+- Configured **Jenkins pipeline** with GitHub webhook.  
+- Integrated **SonarQube** (code quality) and **Trivy** (security scan).  
+- Automated build and test workflow.  
+
+Day 6 – Infrastructure Automation (Terraform)  
+- Wrote Terraform scripts for **AWS EKS cluster** and networking.  
+- Applied configuration to provision EKS.  
+- Verified cluster setup in AWS console.  
