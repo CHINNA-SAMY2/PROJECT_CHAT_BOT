@@ -41,36 +41,29 @@ Project Goals
  Repository Structure
 
 ```text
-your-chatbot-project/
+PROJECT_CHAT_BOT/
 ├── backend/
-│   
+│   ├── app.py
+│   ├── requirements.txt
+│   └── Dockerfile
 │
-│   ├── Dockerfile            # For backend and DB
-│   ├── requirements.txt      # For Python dependencies
-│   └── app.py          # For Node.js dependencies
 ├── frontend/
-│   
-│   
-│   
-│   |__ styles.css
-│   ├── chatbot.html            
-│   └── script.js          
-├── infrastructure/
-│   ├── terraform/
-│   │   ├── main.tf
-│   │   ├── variables.tf
-│   │   └── outputs.tf
-│   └── kubernetes/
-│       ├── deployment.yaml
-│       ├── service.yaml
-│       └── ingress.yaml
-├── documentation/
-│   ├── architecture-diagram.png
-│   ├── report.pdf           # Or .md
-│   └── demo-video.mp4
-├── README.md
-├── .gitignore
-└── Jenkinsfile              # For Jenkins pipeline definition
+│   ├── chatbot.html
+│   ├── script.js
+│   └── styles.css
+│
+├── terraform/
+│   ├── main.tf
+│   ├── outputs.tf
+│   ├── providers.tf
+│   ├── terraform.tfstate
+│   ├── terraform.tfstate.backup
+│   ├── .terraform.lock.hcl
+│   └── .main.tf.swp
+│
+├── Jenkinsfile         # Jenkins pipeline configuration
+└── README.md           # Project documentation
+
  Day 1 – Project Setup  
 - Created GitHub repository.  
 - Defined branching strategy: `main`, `dev`, `feature/*`.  
