@@ -66,7 +66,7 @@ PROJECT_CHAT_BOT/
 
  Day 1 – Project Setup  
 - Created GitHub repository.  
-- Defined branching strategy: `main`, `dev`, `feature/*`.  
+- Defined branching strategy: `main`, `dev`, 
 - Added initial project goals.  
 
  Day 2 – Backend Development  
