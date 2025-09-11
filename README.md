@@ -46,18 +46,18 @@ your-chatbot-project/
 │   └── workflows/
 │       └── jenkins-ci-cd.yml  # Or other CI/CD related files if not using Jenkins directly in repo
 ├── backend/
-│   ├── src/
-│   │   └── (Python Flask / Node.js Express code)
+│   
+│
 │   ├── Dockerfile            # For backend and DB
 │   ├── requirements.txt      # For Python dependencies
-│   └── package.json          # For Node.js dependencies
+│   └── app.py          # For Node.js dependencies
 ├── frontend/
-│   ├── public/
-│   │   └── index.html
-│   ├── src/
-│   │   └── (React / HTML/CSS/JS code)
-│   ├── Dockerfile            # If frontend is also containerized
-│   └── package.json          # For React dependencies
+│   
+│   
+│   
+│   |__ styles.css
+│   ├── chatbot.html            
+│   └── script.js          
 ├── infrastructure/
 │   ├── terraform/
 │   │   ├── main.tf
