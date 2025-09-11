@@ -42,9 +42,6 @@ Project Goals
 
 ```text
 your-chatbot-project/
-├── .github/
-│   └── workflows/
-│       └── jenkins-ci-cd.yml  # Or other CI/CD related files if not using Jenkins directly in repo
 ├── backend/
 │   
 │
